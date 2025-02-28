@@ -1,7 +1,10 @@
+"use client"; 
+
 import { NotesList } from "@/components/notes-list"
 import { Button } from "@/components/ui/button"
 import { PlusCircle } from "lucide-react"
 import Link from "next/link"
+import { Suspense } from "react"
 
 export default function NotesPage() {
   return (
@@ -15,8 +18,9 @@ export default function NotesPage() {
           </Button>
         </Link>
       </div>
-      <NotesList />
+      <Suspense fallback={<p>Loading notes...</p>}>
+        <NotesList />
+      </Suspense>
     </div>
   )
 }
-
