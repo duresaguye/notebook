@@ -8,6 +8,8 @@ import { ArrowLeft, Edit, Trash } from "lucide-react"
 import Link from "next/link"
 import type { Note } from "@/lib/types"
 import { getNoteById, deleteNote } from "@/lib/notes-storage"
+import { NoteAISummary } from "@/components/ai/note-ai-summary"
+import { NoteAIChat } from "@/components/ai/note-ai-chat"
 
 export default function NotePage() {
   const params = useParams()
@@ -40,7 +42,7 @@ export default function NotePage() {
   }
 
   return (
-    <div className="max-w-4xl mx-auto">
+    <div className="container mx-auto max-w-6xl p-4">
       <div className="flex items-center justify-between mb-6">
         <div className="flex items-center gap-4">
           <Link href="/notes">
@@ -63,8 +65,17 @@ export default function NotePage() {
           </Button>
         </div>
       </div>
-      <div className="bg-card rounded-lg border shadow-sm p-6">
-        <NoteView note={note} />
+
+      <div className="grid gap-6 md:grid-cols-[2fr_1fr]">
+        <div className="space-y-6">
+          <div className="bg-card rounded-lg border shadow-sm p-6">
+            <NoteView note={note} />
+          </div>
+          <NoteAISummary noteContent={note.content} />
+        </div>
+        <div>
+          <NoteAIChat noteContent={note.content} />
+        </div>
       </div>
     </div>
   )

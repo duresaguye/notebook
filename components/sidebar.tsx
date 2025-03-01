@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react"
 import Link from "next/link"
-import { usePathname } from "next/navigation"
+import { usePathname, useRouter } from "next/navigation" // Import useRouter
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { ScrollArea } from "@/components/ui/scroll-area"
@@ -17,6 +17,7 @@ export function Sidebar() {
   const [isOpen, setIsOpen] = useState(true)
   const [tags, setTags] = useState<string[]>([])
   const [searchQuery, setSearchQuery] = useState("")
+  const router = useRouter(); // Initialize useRouter
 
   const { theme } = useTheme()
 
@@ -28,6 +29,12 @@ export function Sidebar() {
 
     loadTags()
   }, [])
+
+  const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setSearchQuery(e.target.value);
+    // Navigate to /notes with the search query as a parameter
+    router.push(`/notes?search=${e.target.value}`);
+  };
 
   return (
     <>
@@ -59,13 +66,13 @@ export function Sidebar() {
           <Input
             placeholder="Search..."
             value={searchQuery}
-            onChange={(e) => setSearchQuery(e.target.value)}
+            onChange={handleSearchChange} // Use the new handler
             className={cn("h-8", !isOpen && "md:hidden")}
           />
         </div>
         <ScrollArea className="flex-1 overflow-auto">
           <nav className="flex flex-col gap-2 p-2">
-            <Link href="/notes">
+            <Link href={`/notes${searchQuery ? `?search=${searchQuery}` : ""}`}>
               <Button
                 variant={pathname === "/notes" ? "secondary" : "ghost"}
                 className={cn("w-full justify-start", !isOpen && "md:justify-center")}
@@ -86,13 +93,13 @@ export function Sidebar() {
             <Separator className="my-2" />
             <div className={cn("px-2 text-xs font-medium text-muted-foreground", !isOpen && "md:hidden")}>Tags</div>
             {tags.map((tag) => (
-              <Link key={tag} href={`/notes?tag=${tag}`}>
-                <Button variant="ghost" className={cn("w-full justify-start", !isOpen && "md:justify-center")}>
-                  <Hash className="mr-2 h-4 w-4 md:mr-0" />
-                  <span className={cn(!isOpen && "md:hidden")}>{tag}</span>
-                </Button>
-              </Link>
-            ))}
+  <Link key={tag} href={`/notes?tag=${tag}`}>
+    <Button variant="ghost" className={cn("w-full justify-start", !isOpen && "md:justify-center")}>
+      <Hash className="mr-2 h-4 w-4 md:mr-0" />
+      <span className={cn(!isOpen && "md:hidden")}>{tag}</span>
+    </Button>
+  </Link>
+))}
           </nav>
           <div className="p-2 text-xs text-muted-foreground">Current theme: {theme}</div>
         </ScrollArea>
@@ -114,4 +121,3 @@ export function Sidebar() {
     </>
   )
 }
-

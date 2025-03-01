@@ -1,3 +1,4 @@
+// filepath: /home/dura/web/digital/digital-note/components/notes-list.tsx
 "use client"
 
 import { useEffect, useState } from "react"
@@ -15,6 +16,7 @@ export function NotesList() {
   const [loading, setLoading] = useState(true)
   const searchParams = useSearchParams()
   const tagFilter = searchParams.get("tag")
+  const searchQuery = searchParams.get("search") || ""; // Get the search query
 
   useEffect(() => {
     const fetchNotes = async () => {
@@ -22,7 +24,15 @@ export function NotesList() {
       const allNotes = await getAllNotes()
 
       // Filter by tag if needed
-      const filteredNotes = tagFilter ? allNotes.filter((note) => note.tags.includes(tagFilter)) : allNotes
+      let filteredNotes = tagFilter ? allNotes.filter((note) => note.tags.includes(tagFilter)) : allNotes
+
+      // Filter by search query
+      if (searchQuery) {
+        filteredNotes = filteredNotes.filter((note) =>
+          note.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+          note.content.toLowerCase().includes(searchQuery.toLowerCase())
+        );
+      }
 
       // Sort by updated date (newest first)
       filteredNotes.sort((a, b) => new Date(b.updatedAt).getTime() - new Date(a.updatedAt).getTime())
@@ -32,7 +42,7 @@ export function NotesList() {
     }
 
     fetchNotes()
-  }, [tagFilter])
+  }, [tagFilter, searchQuery]) // Add searchQuery to the dependency array
 
   if (loading) {
     return <div className="text-center p-8">Loading notes...</div>
@@ -77,4 +87,3 @@ export function NotesList() {
     </div>
   )
 }
-
