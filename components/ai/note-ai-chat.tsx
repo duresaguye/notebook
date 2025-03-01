@@ -17,7 +17,7 @@ interface NoteAIChatProps {
   noteContent: string
 }
 
-export function NoteAIChat({ noteContent }: NoteAIChatProps) {
+export function NoteAIChat({ }: NoteAIChatProps) {
   const [messages, setMessages] = useState<Message[]>([])
   const [input, setInput] = useState("")
   const [isLoading, setIsLoading] = useState(false)

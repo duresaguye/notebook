@@ -9,7 +9,7 @@ interface NoteAISummaryProps {
   noteContent: string
 }
 
-export function NoteAISummary({ noteContent }: NoteAISummaryProps) {
+export function NoteAISummary({ }: NoteAISummaryProps) {
   const [summary, setSummary] = useState<string | null>(null)
   const [isLoading, setIsLoading] = useState(false)
 
