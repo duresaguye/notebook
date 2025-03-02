@@ -1,4 +1,4 @@
-// /lib/gemini.ts
+
 export async function generateChatResponse(message: string, noteContent: string) {
     const res = await fetch("/api/gemini", {
       method: "POST",
