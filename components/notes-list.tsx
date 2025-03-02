@@ -1,4 +1,4 @@
-// filepath: /home/dura/web/digital/digital-note/components/notes-list.tsx
+
 "use client"
 
 import { useEffect, useState } from "react"
@@ -16,7 +16,7 @@ export function NotesList() {
   const [loading, setLoading] = useState(true)
   const searchParams = useSearchParams()
   const tagFilter = searchParams.get("tag")
-  const searchQuery = searchParams.get("search") || ""; // Get the search query
+  const searchQuery = searchParams.get("search") || ""; 
 
   useEffect(() => {
     const fetchNotes = async () => {

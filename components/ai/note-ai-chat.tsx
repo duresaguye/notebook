@@ -1,46 +1,48 @@
-"use client"
+"use client";
 
-import type React from "react"
-
-import { useState } from "react"
-import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
-import { ScrollArea } from "@/components/ui/scroll-area"
-import { Bot, Send, User } from "lucide-react"
+import type React from "react";
+import { useState } from "react";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { ScrollArea } from "@/components/ui/scroll-area";
+import { Bot, Send, User } from "lucide-react";
+import { generateChatResponse } from "@/lib/gemini";
 
 interface Message {
-  role: "user" | "assistant"
-  content: string
+  role: "user" | "assistant";
+  content: string;
 }
 
 interface NoteAIChatProps {
-  noteContent: string
+  noteContent: string;
 }
 
-export function NoteAIChat({ }: NoteAIChatProps) {
-  const [messages, setMessages] = useState<Message[]>([])
-  const [input, setInput] = useState("")
-  const [isLoading, setIsLoading] = useState(false)
+export function NoteAIChat({ noteContent }: NoteAIChatProps) {
+  const [messages, setMessages] = useState<Message[]>([]);
+  const [input, setInput] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault()
-    if (!input.trim()) return
+    e.preventDefault();
+    if (!input.trim()) return;
 
-    const userMessage = { role: "user" as const, content: input }
-    setMessages((prev) => [...prev, userMessage])
-    setInput("")
-    setIsLoading(true)
+    const userMessage: Message = { role: "user", content: input };
+    setMessages((prev) => [...prev, userMessage]);
+    setInput("");
+    setIsLoading(true);
 
-    // Simulate AI response
-    setTimeout(() => {
-      const aiMessage = {
-        role: "assistant" as const,
-        content: "This is a simulated AI response. Replace with actual AI integration.",
-      }
-      setMessages((prev) => [...prev, aiMessage])
-      setIsLoading(false)
-    }, 1000)
-  }
+    try {
+      const aiResponse = await generateChatResponse(input, noteContent);
+      const aiMessage: Message = { role: "assistant", content: aiResponse };
+      setMessages((prev) => [...prev, aiMessage]);
+    } catch (error) {
+      setMessages((prev) => [
+        ...prev,
+        { role: "assistant", content: "AI response failed. Try again." }
+      ]);
+    }
+    setIsLoading(false);
+  };
 
   return (
     <div className="flex h-[500px] flex-col rounded-lg border bg-background">
@@ -90,6 +92,5 @@ export function NoteAIChat({ }: NoteAIChatProps) {
         </div>
       </form>
     </div>
-  )
+  );
 }
-
