@@ -35,7 +35,8 @@ export function NoteAIChat({ noteContent }: NoteAIChatProps) {
       const aiResponse = await generateChatResponse(input, noteContent);
       const aiMessage: Message = { role: "assistant", content: aiResponse };
       setMessages((prev) => [...prev, aiMessage]);
-    } catch (error) {
+    } catch (error: unknown) { // Change any to unknown
+      console.error("AI response failed:", error);
       setMessages((prev) => [
         ...prev,
         { role: "assistant", content: "AI response failed. Try again." }
