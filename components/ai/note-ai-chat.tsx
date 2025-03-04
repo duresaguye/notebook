@@ -45,7 +45,7 @@ export function NoteAIChat({ noteContent }: NoteAIChatProps) {
   };
 
   return (
-    <div className="flex h-[500px] flex-col rounded-lg border bg-background">
+    <div className="flex h-[500px] flex-col rounded-lg border bg-background\">
       <div className="flex items-center gap-2 border-b px-4 py-2">
         <Bot className="h-5 w-5" />
         <h3 className="font-semibold">Chat with AI about this note</h3>
