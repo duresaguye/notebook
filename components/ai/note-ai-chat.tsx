@@ -1,12 +1,13 @@
 "use client";
 
-import type React from "react";
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Bot, Send, User } from "lucide-react";
 import { generateChatResponse } from "@/lib/gemini";
+import { cn } from "@/lib/utils";
+import { Skeleton } from "@/components/ui/skeleton";
 
 interface Message {
   role: "user" | "assistant";
@@ -21,6 +22,20 @@ export function NoteAIChat({ noteContent }: NoteAIChatProps) {
   const [messages, setMessages] = useState<Message[]>([]);
   const [input, setInput] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+  const scrollRef = useRef<HTMLDivElement>(null);
+
+  const scrollToBottom = () => {
+    setTimeout(() => {
+      scrollRef.current?.scrollTo({
+        top: scrollRef.current.scrollHeight,
+        behavior: "smooth"
+      });
+    }, 100);
+  };
+
+  useEffect(() => {
+    scrollToBottom();
+  }, [messages]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -35,44 +50,65 @@ export function NoteAIChat({ noteContent }: NoteAIChatProps) {
       const aiResponse = await generateChatResponse(input, noteContent);
       const aiMessage: Message = { role: "assistant", content: aiResponse };
       setMessages((prev) => [...prev, aiMessage]);
-    } catch (error: unknown) { // Change any to unknown
+    } catch (error) {
       console.error("AI response failed:", error);
       setMessages((prev) => [
         ...prev,
-        { role: "assistant", content: "AI response failed. Try again." }
+        { role: "assistant", content: "Sorry, I couldn't process that. Please try again." }
       ]);
+    } finally {
+      setIsLoading(false);
     }
-    setIsLoading(false);
   };
 
   return (
-    <div className="flex h-[500px] flex-col rounded-lg border bg-background\">
-      <div className="flex items-center gap-2 border-b px-4 py-2">
-        <Bot className="h-5 w-5" />
-        <h3 className="font-semibold">Chat with AI about this note</h3>
+    <div className="flex h-[600px] flex-col rounded-lg border bg-background shadow-sm">
+      <div className="flex items-center gap-3 border-b px-4 py-3">
+        <Bot className="h-6 w-6 text-primary" />
+        <div>
+          <h3 className="font-semibold">Note AI Chat</h3>
+          <p className="text-sm text-muted-foreground">Ask questions about this note</p>
+        </div>
       </div>
 
-      <ScrollArea className="flex-1 p-4">
-        <div className="space-y-4">
-          {messages.map((message, i) => (
+      <ScrollArea 
+        ref={scrollRef}
+        className="flex-1 p-4"
+        style={{ height: 'calc(100% - 136px)' }}
+      >
+        <div className="space-y-6">
+          {messages.map((message, index) => (
             <div
-              key={i}
-              className={`flex items-start gap-2 ${message.role === "assistant" ? "flex-row" : "flex-row-reverse"}`}
+              key={index}
+              className={cn(
+                "flex gap-3",
+                message.role === "user" ? "justify-end" : "justify-start"
+              )}
             >
+              {message.role === "assistant" && (
+                <Bot className="h-6 w-6 flex-shrink-0 text-muted-foreground" />
+              )}
               <div
-                className={`rounded-lg px-3 py-2 ${
-                  message.role === "assistant" ? "bg-muted" : "bg-primary text-primary-foreground"
-                }`}
+                className={cn(
+                  "max-w-[min(85%,600px)] rounded-xl p-4 text-sm",
+                  message.role === "assistant" 
+                    ? "bg-muted" 
+                    : "bg-primary text-primary-foreground"
+                )}
               >
-                {message.content}
+                <div className="prose prose-sm max-w-none break-words">
+                  {message.content}
+                </div>
               </div>
-              {message.role === "assistant" ? <Bot className="h-5 w-5" /> : <User className="h-5 w-5" />}
+              {message.role === "user" && (
+                <User className="h-6 w-6 flex-shrink-0 text-muted-foreground" />
+              )}
             </div>
           ))}
           {isLoading && (
-            <div className="flex items-center gap-2">
-              <Bot className="h-5 w-5" />
-              <div className="rounded-lg bg-muted px-3 py-2">Thinking...</div>
+            <div className="flex gap-3">
+              <Bot className="h-6 w-6 text-muted-foreground" />
+              <Skeleton className="h-[84px] w-[300px] rounded-xl" />
             </div>
           )}
         </div>
@@ -85,12 +121,21 @@ export function NoteAIChat({ noteContent }: NoteAIChatProps) {
             value={input}
             onChange={(e) => setInput(e.target.value)}
             disabled={isLoading}
+            className="rounded-lg bg-background"
           />
-          <Button type="submit" size="icon" disabled={isLoading}>
+          <Button 
+            type="submit" 
+            size="default"
+            disabled={isLoading}
+            className="gap-2 rounded-lg"
+          >
             <Send className="h-4 w-4" />
-            <span className="sr-only">Send message</span>
+            <span className="hidden sm:inline">Send</span>
           </Button>
         </div>
+        <p className="mt-2 text-center text-xs text-muted-foreground">
+          AI may occasionally generate incorrect information
+        </p>
       </form>
     </div>
   );
