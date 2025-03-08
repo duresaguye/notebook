@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { useParams, useRouter } from "next/navigation";
 import { NoteView } from "@/components/note-view";
 import { Button } from "@/components/ui/button";
-import { ArrowLeft, Edit, Trash } from "lucide-react";
+import { ArrowLeft, Edit, Trash,Loader2 } from "lucide-react";
 import Link from "next/link";
 import type { Note } from "@/lib/types";
 import { getNoteById, deleteNote } from "@/lib/notes-storage";
@@ -38,7 +38,7 @@ export default function NotePage() {
   };
 
   if (!note) {
-    return <div className="p-8 text-center">Loading...</div>;
+    return  <Loader2 className="animate-spin h-8 w-8 text-primary" />;
   }
 
   return (

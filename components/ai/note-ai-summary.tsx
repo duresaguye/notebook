@@ -138,7 +138,7 @@ export function NoteAISummary({ noteContent }: { noteContent: string }) {
             })}
           </div>
         ) : (
-          <p className="text-gray-500 text-center py-4">
+          <p className=" text-center py-4">
             Select a processing type and click the AI icon
           </p>
         )}
