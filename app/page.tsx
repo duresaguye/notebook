@@ -10,7 +10,7 @@ export default function LandingPage() {
   return (
     <div className="flex flex-col min-h-screen ">
       {/* Navigation */}
-      <header className="border-b">
+      <header className="border-b sticky top-0 bg-background z-10">
         <div className="container flex items-center justify-between py-4">
           <div className="flex items-center gap-2">
             <Brain className="h-6 w-6 text-primary" />
@@ -60,21 +60,27 @@ export default function LandingPage() {
               </Button>
             </div>
             <div className="flex items-center gap-4 text-sm text-muted-foreground">
-              <div className="flex -space-x-2">
-                {[1, 2, 3, 4].map((i) => (
-                  <div key={i} className="h-8 w-8 rounded-full border-2 border-background bg-muted overflow-hidden">
-                    <img
-                      src={`/sara.png?height=32&width=32&text=${i}`}
-                      alt="User avatar"
-                      className="h-full w-full object-cover"
-                    />
-                  </div>
-                ))}
-              </div>
-              <div>
-                <span className="font-medium">10,000+</span> students already improving their grades
-              </div>
-            </div>
+  <div className="flex -space-x-3 group relative transition-all duration-500 hover:-space-x-1">
+    {["sara", "beza", "dev", "hero"].map((name, index) => (
+      <div 
+        key={name}
+        className="h-10 w-10 rounded-full border-2 border-background bg-muted overflow-hidden 
+                  transition-all duration-500 transform hover:scale-110 hover:z-10 hover:shadow-lg
+                  group-hover:-rotate-12 group-hover:translate-y-2 first:group-hover:-translate-x-2 last:group-hover:translate-x-2"
+        style={{ transitionDelay: `${index * 75}ms` }}
+      >
+        <img
+          src={`/${name}.png`}  
+          alt={`${name}'s avatar`}
+          className="h-full w-full object-cover"
+        />
+      </div>
+    ))}
+  </div>
+  <div>
+    <span className="font-medium">10,000+</span> students already improving their grades
+  </div>
+</div>
           </div>
           <div className="flex-1 w-full max-w-xl">
             <HeroAnimation />
