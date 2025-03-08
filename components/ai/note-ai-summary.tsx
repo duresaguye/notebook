@@ -121,7 +121,7 @@ export function NoteAISummary({ noteContent }: { noteContent: string }) {
               return cleanItem !== '' ? (
                 <div 
                   key={index}
-                  className="flex space-x-2 text-gray-700 leading-relaxed"
+                  className="flex space-x-2  leading-relaxed"
                 >
                   <span className="text-blue-600">•</span>
                   <span className="flex-1">
