@@ -1,0 +1,35 @@
+
+.ql-toolbar {
+    border-top: 1px solid #e5e7eb !important;
+    border-bottom: 1px solid #e5e7eb !important;
+    background-color: #f9fafb !important;
+  }
+  
+  .ql-container {
+    border: none !important;
+    font-family: inherit !important;
+  }
+  
+  .ql-editor {
+    min-height: 150px;
+    font-size: 0.875rem !important;
+    color: #010915 !important;
+  }
+  
+  .quill {
+    display: flex;
+    flex-direction: column-reverse;
+    height: 100%;
+  }
+  
+  .ql-snow .ql-stroke {
+    stroke: #4b5563 !important;
+  }
+  
+  .ql-snow .ql-fill {
+    fill: #4b5563 !important;
+  }
+  
+  .ql-snow .ql-picker-label {
+    color: #4b5563 !important;
+  }

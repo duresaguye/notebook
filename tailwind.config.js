@@ -61,6 +61,10 @@ module.exports = {
           "accordion-down": {
             from: { height: 0 },
             to: { height: "var(--radix-accordion-content-height)" },
+            "slide-in-from-left-8": {
+              "0%": { transform: "translateX(-2rem)", opacity: "0" },
+              "100%": { transform: "translateX(0)", opacity: "1" },
+            },
           },
           "accordion-up": {
             from: { height: "var(--radix-accordion-content-height)" },

@@ -1,18 +1,24 @@
 "use client"
 
-import type React from "react"
-
-import { useState, useRef } from "react"
+import { useState } from "react"
+import dynamic from 'next/dynamic'
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
-import { Textarea } from "@/components/ui/textarea"
 import { Badge } from "@/components/ui/badge"
 import { X } from "lucide-react"
 import { NoteView } from "@/components/note-view"
 import { Toolbar } from "@/components/editor/toolbar"
 import { ImageUpload } from "@/components/editor/image-upload"
 import { toast } from "sonner"
+
+const RichTextEditor = dynamic(
+  () => import('./RichTextEditor').then(mod => mod.RichTextEditor),
+  { 
+    ssr: false,
+    loading: () => <div className="h-[300px] animate-pulse bg-muted rounded-md" />
+  }
+)
 
 interface NoteEditorProps {
   initialTitle?: string
@@ -35,7 +41,6 @@ export function NoteEditor({
   const [newTag, setNewTag] = useState("")
   const [activeTab, setActiveTab] = useState("edit")
   const [showImageUpload, setShowImageUpload] = useState(false)
-  const textareaRef = useRef<HTMLTextAreaElement>(null)
 
   const handleAddTag = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === "Enter" && newTag.trim()) {
@@ -51,34 +56,8 @@ export function NoteEditor({
     setTags(tags.filter((tag) => tag !== tagToRemove))
   }
 
-  const insertText = (text: string) => {
-    const textarea = textareaRef.current
-    if (!textarea) return
-
-    const start = textarea.selectionStart
-    const end = textarea.selectionEnd
-    const beforeText = content.substring(0, start)
-    const afterText = content.substring(end)
-
-    // Handle different types of insertions
-    let insertedText = text
-    if (text === "**text**" || text === "*text*" || text === "~~text~~" || text === "[text](url)") {
-      const selectedText = content.substring(start, end)
-      insertedText = selectedText ? text.replace("text", selectedText) : text
-    }
-
-    setContent(beforeText + insertedText + afterText)
-
-    // Reset cursor position
-    setTimeout(() => {
-      textarea.focus()
-      const newCursorPos = start + insertedText.length
-      textarea.setSelectionRange(newCursorPos, newCursorPos)
-    }, 0)
-  }
-
   const handleImageSelected = (imageUrl: string) => {
-    insertText(`![Image](${imageUrl})\n`)
+    setContent(prev => `${prev}\n![Image](${imageUrl})\n`)
   }
 
   const handleSave = async (e: React.FormEvent) => {
@@ -146,15 +125,14 @@ export function NoteEditor({
         </TabsList>
         <TabsContent value="edit" className="mt-2">
           <div className="space-y-2">
-            <Toolbar onInsert={insertText} onImageUpload={() => setShowImageUpload(true)} />
-            <Textarea
-              ref={textareaRef}
-              placeholder="Write your note content here... Markdown is supported!"
+            <Toolbar 
+              onImageUpload={() => setShowImageUpload(true)} 
+              onInsert={(text) => setContent(prev => `${prev}${text}`)} 
+            />
+            <RichTextEditor
               value={content}
-              onChange={(e) => setContent(e.target.value)}
-              className="min-h-[300px] font-mono"
-              disabled={isLoading}
-              required
+              onChange={setContent}
+              className="min-h-[300px] rounded-md border"
             />
           </div>
         </TabsContent>
@@ -188,4 +166,3 @@ export function NoteEditor({
     </form>
   )
 }
-
