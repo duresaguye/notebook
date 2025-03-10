@@ -5,7 +5,11 @@ import { Card } from "@/components/ui/card"
 import { cn } from "@/lib/utils"
 
 
-export default function HeroAnimation() {
+interface HeroAnimationProps {
+  className?: string;
+}
+
+export default function HeroAnimation({ className }: HeroAnimationProps) {
   const [activeTab, setActiveTab] = useState(0)
   const [progress, setProgress] = useState(0)
 
@@ -23,7 +27,7 @@ export default function HeroAnimation() {
 
     return () => cancelAnimationFrame(frame)
   }, [progress])
-
+  
   const tabs = [
     {
       title: "Take Notes",
@@ -94,6 +98,7 @@ export default function HeroAnimation() {
   ]
 
   return (
+   
     <div className="rounded-xl border bg-card shadow-2xl overflow-hidden transition-all hover:shadow-3xl">
       <div className="flex border-b relative">
         {tabs.map((tab, index) => (
