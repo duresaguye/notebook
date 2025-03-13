@@ -7,6 +7,7 @@ import TestimonialCard from "@/components/testimonial-card"
 import HeroAnimation from "@/components/hero-animation"
 import Navbar from "@/components/navbar"
 
+
 export default function LandingPage() {
   return (
     <div className="flex flex-col min-h-screen ">
@@ -316,9 +317,12 @@ export default function LandingPage() {
           <p className="text-xl mb-8 text-primary-foreground/90">
             Join thousands of students who are studying smarter, not harder.
           </p>
-          <Button size="lg" variant="secondary" className="gap-2">
+           <Link href="/notes">
+           <Button size="lg" variant="secondary" className="gap-2">
             Get Started Free <ArrowRight className="h-4 w-4" />
           </Button>
+           </Link>
+          
           <p className="mt-4 text-primary-foreground/80">No credit card required. Cancel anytime.</p>
         </div>
       </section>
