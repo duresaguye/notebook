@@ -1,5 +1,5 @@
 import Link from "next/link"
-import { ArrowRight, BookOpen, Brain, MessageSquare, Sparkles, Zap,ChevronRight  } from "lucide-react"
+import { ArrowRight, BookOpen, Brain, MessageSquare, Sparkles, Zap,ChevronRight,CheckCircle, Lock   } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import FeatureCard from "@/components/feature-card"
 import PricingCard from "@/components/pricing-card"
@@ -212,101 +212,143 @@ export default function LandingPage() {
   </div>
 </section>
 
-{/* Pricing Section */}
-<section id="pricing" className="py-12  md:py-20 flex justify-center items-center ">
-  <div className="container px-8 sm:px-6 lg:px-8">
-    <div className="text-center max-w-3xl mx-auto mb-8 md:mb-12 lg:mb-16">
-      <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-3 md:mb-4">
-        Simple, Transparent Pricing
+<section id="pricing" className="relative py-16 md:py-24 lg:py-32 bg-gradient-to-b from-background to-primary/5">
+  {/* Decorative background elements */}
+  <div className="absolute inset-0 -z-10">
+    <div className="absolute left-1/4 top-1/3 h-[500px] w-[800px] -translate-x-1/2 -translate-y-1/2 bg-gradient-to-r from-primary/10 to-purple-500/10 blur-3xl opacity-50" />
+  </div>
+
+  <div className="container px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+    <div className="text-center max-w-3xl mx-auto mb-12 md:mb-16 lg:mb-20">
+      <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold bg-gradient-to-r from-foreground via-primary to-foreground bg-clip-text text-transparent mb-4">
+        Simple & Transparent Pricing
       </h2>
-      <p className="text-base md:text-lg text-muted-foreground">
-        Choose the plan that fits your needs
+      <p className="text-lg md:text-xl text-muted-foreground/80">
+        Start for free, upgrade as you grow
       </p>
     </div>
 
-    <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 md:gap-16  max-w-8xl mx-auto">
+    <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 md:gap-10 lg:gap-12">
+      {/* Free Tier */}
       <PricingCard
-        title="Free"
+        title="Starter"
         price="$0"
-        description="Perfect for trying out StudyBuddy"
-        features={["Basic note-taking", "5 AI summaries/month", "Limited chat", "1 subject"]}
+        description="Perfect for exploring StudyBuddy"
+        features={[
+          "Basic note-taking",
+          "5 AI summaries/month",
+          "Limited chat access",
+          "1 subject"
+        ]}
         buttonText="Get Started"
         buttonVariant="outline"
-        className="max-w-xs mx-auto lg:max-w-none "
+        className="border border-primary/10 bg-background/50 backdrop-blur-sm hover:border-primary/20 transition-all"
       />
+
+      {/* Pro Tier - Featured */}
       <PricingCard
-        title="Pro"
+        title="Pro Scholar"
         price="$9.99"
         period="per month"
-        description="Everything you need for serious studying"
+        description="Optimal for serious learners"
         features={[
           "Advanced note-taking",
           "Unlimited AI summaries",
-          "Unlimited chat with AI",
+          "24/7 AI tutor access",
           "5 subjects",
-          "Exam preparation tools",
-          "Priority support",
+          "Exam prep toolkit",
+          "Priority support"
         ]}
-        buttonText="Get Pro"
-        buttonVariant="default"
+        buttonText="Start Learning"
+         buttonVariant="default"
         popular={true}
-        className="max-w-xs mx-auto lg:max-w-none"
+        className="relative border-2 border-primary/20 bg-gradient-to-b from-primary/5 to-background/50 shadow-xl hover:shadow-2xl hover:-translate-y-2 transition-all"
+        ribbon="Most Popular"
       />
+
+      {/* Team Tier */}
       <PricingCard
-        title="Team"
+        title="Study Squad"
         price="$19.99"
         period="per month"
-        description="Perfect for study groups and classes"
+        description="Collaborative learning solution"
         features={[
-          "Everything in Pro",
-          "Collaborative notes",
-          "Group chat with AI",
+          "All Pro features",
+          "Group workspace",
+          "Shared AI resources",
           "Unlimited subjects",
           "Admin dashboard",
-          "API access",
+          "API & integrations"
         ]}
-        buttonText="Contact Sales"
+        buttonText="Team Inquiry"
         buttonVariant="outline"
-        className="max-w-xs mx-auto lg:max-w-none"
+        className="border border-primary/10 bg-background/50 backdrop-blur-sm hover:border-primary/20 transition-all"
       />
+    </div>
+
+    {/* Trust elements */}
+    <div className="mt-16 md:mt-20 text-center text-sm text-muted-foreground/80 flex flex-col items-center gap-2">
+      <div className="flex items-center gap-4">
+        <span className="flex items-center gap-2"><CheckCircle className="h-4 w-4 text-green-500" /> 30-day guarantee</span>
+        <span className="flex items-center gap-2"><Lock className="h-4 w-4 text-blue-500" /> Secure payments</span>
+      </div>
     </div>
   </div>
 </section>
 
-{/* Testimonials */}
-<section className="py-12 md:py-20 lg:ml-32">
-  <div className="container px-4 sm:px-6 lg:px-8">
-    <div className="text-center max-w-3xl mx-auto mb-8 md:mb-12 lg:mb-16">
-      <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-3 md:mb-4">
-        What Our Users Say
+{/* Testimonials */}<section className="relative py-16 md:py-24 lg:py-32 bg-gradient-to-b from-background/50 to-primary/5">
+  {/* Decorative background elements */}
+  <div className="absolute inset-0 -z-10">
+    <div className="absolute left-1/3 top-20 h-[400px] w-[600px] bg-gradient-to-r from-primary/10 to-secondary/10 -translate-y-1/2 rotate-45 rounded-3xl blur-3xl" />
+  </div>
+
+  <div className="container px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+    {/* Header section */}
+    <div className="text-start max-w-4xl mb-12 md:mb-16 lg:mb-20 space-y-4">
+      <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold bg-gradient-to-r from-foreground via-primary to-foreground bg-clip-text text-transparent">
+        What Our <span className="italic">Brilliant</span> Users Say
       </h2>
-      <p className="text-base md:text-lg text-muted-foreground">
-        Join thousands of students improving their academic performance
+      
+      <p className="text-lg md:text-xl text-muted-foreground/80 max-w-2xl">
+        Join <span className="font-semibold text-primary">30,000+</span> students boosting their learning outcomes
       </p>
     </div>
 
-    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
+    {/* Card grid */}
+    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-10 lg:gap-12">
       <TestimonialCard
         quote="StudyBuddy AI helped me raise my GPA from 3.2 to 3.8 in just one semester. The AI summaries and chat feature are game-changers!"
-        author="dawit kifle"
+        author="Dawit Kifle"
         role="Computer Science Student"
         avatarUrl="/dev.png"
-        className="hover:translate-y-[-4px] transition-transform duration-300"
+        className="hover:shadow-2xl hover:border-primary/20 transition-all duration-300 hover:-translate-y-2 border border-transparent bg-background/50 backdrop-blur-sm"
       />
       <TestimonialCard
         quote="As a med student, I have tons of material to go through. StudyBuddy organizes everything and helps me understand complex topics quickly."
         author="Sarah Chen"
         role="Medical Student"
         avatarUrl="/sara.png"
-        className="hover:translate-y-[-4px] transition-transform duration-300"
+        className="hover:shadow-2xl hover:border-primary/20 transition-all duration-300 hover:-translate-y-2 border border-transparent bg-background/50 backdrop-blur-sm"
       />
       <TestimonialCard
         quote="The exam preparation tools are incredible. I generated practice questions from my notes and aced my finals!"
         author="Beza Tadesse"
         role="Business Major"
         avatarUrl="/beza.png"
-        className="hover:translate-y-[-4px] transition-transform duration-300"
+        className="hover:shadow-2xl hover:border-primary/20 transition-all duration-300 hover:-translate-y-2 border border-transparent bg-background/50 backdrop-blur-sm"
       />
+    </div>
+
+    {/* Stats section */}
+    <div className="mt-16 md:mt-20 flex flex-wrap gap-8 items-center justify-center text-muted-foreground/80 border-t pt-12">
+      <div className="flex items-center gap-2 px-4 py-2 bg-background/80 rounded-full">
+        <div className="h-3 w-3 bg-green-500 rounded-full" />
+        <span className="font-medium">4.9/5 Average Rating</span>
+      </div>
+      <div className="flex items-center gap-2 px-4 py-2 bg-background/80 rounded-full">
+        <div className="h-3 w-3 bg-purple-500 rounded-full" />
+        <span className="font-medium">98% Success Rate</span>
+      </div>
     </div>
   </div>
 </section>
@@ -332,10 +374,15 @@ export default function LandingPage() {
         <div className="container">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
             <div>
-              <div className="flex items-center gap-2 mb-4">
-                <Brain className="h-5 w-5 text-primary" />
-                <span className="font-bold">StudyBuddy AI</span>
-              </div>
+            <span className="relative inline-block text-xl font-bold group">
+  <span className="absolute inset-0 bg-gradient-to-r from-blue-600 to-purple-600 rounded-full blur opacity-30 group-hover:opacity-50 transition-all duration-300"></span>
+  <span className="relative z-10 bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+    Study<span className="italic font-black text-[1.35rem] tracking-tight">Buddy</span>
+    <span className="ml-2 font-mono font-normal uppercase text-sm tracking-wider bg-gradient-to-r from-purple-600 to-blue-500 bg-clip-text text-transparent">
+      AI
+    </span>
+  </span>
+</span>
               <p className="text-sm text-muted-foreground">
                 Revolutionizing the way students learn with AI-powered tools.
               </p>

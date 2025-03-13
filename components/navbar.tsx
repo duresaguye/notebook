@@ -1,7 +1,9 @@
 "use client"
 import { useState } from 'react';
-import { Menu, X, Brain } from 'lucide-react';
+import { Menu, X} from 'lucide-react';
+
 import { Button } from './ui/button';
+import Image from 'next/image';
 
 export default function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -9,10 +11,15 @@ export default function Navbar() {
   return (
     <header className="border-b sticky top-0 bg-background z-50">
       <div className="container px-4 sm:px-6 lg:px-8 flex items-center justify-between py-4">
-        <div className="flex items-center gap-2">
-          <Brain className="h-6 w-6 text-primary" />
-          <span className="text-xl font-bold">StudyBuddy AI</span>
-        </div>
+      <span className="relative inline-block text-xl font-bold group">
+  <span className="absolute inset-0 bg-gradient-to-r from-blue-600 to-purple-600 rounded-full blur opacity-30 group-hover:opacity-50 transition-all duration-300"></span>
+  <span className="relative z-10 bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+    Study<span className="italic font-black text-[1.35rem] tracking-tight">Buddy</span>
+    <span className="ml-2 font-mono font-normal uppercase text-sm tracking-wider bg-gradient-to-r from-purple-600 to-blue-500 bg-clip-text text-transparent">
+      AI
+    </span>
+  </span>
+</span>
 
         {/* Desktop Navigation */}
         <nav className="hidden md:flex items-center gap-6">
