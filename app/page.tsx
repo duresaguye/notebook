@@ -7,7 +7,7 @@ import TestimonialCard from "@/components/testimonial-card"
 import HeroAnimation from "@/components/hero-animation"
 import Navbar from "@/components/Navbar"
 import Footer from "@/components/Footer"
-
+import Image from "next/image"
 
 export default function LandingPage() {
   return (
@@ -36,27 +36,32 @@ export default function LandingPage() {
                   Get Started Free <ArrowRight className="h-4 w-4" />
                 </Button>
               </Link>
-             
-              <Button size="lg" variant="outline" className="cursor-pointer">
-                See how it works
-              </Button>
+              <Link href="#how-it-works">
+  <Button size="lg" variant="outline" className="cursor-pointer">
+    See how it works
+  </Button>
+</Link>
+
             </div>
             <div className="flex items-center gap-4 text-sm text-muted-foreground">
-              <div className="flex -space-x-2">
-                {[1, 2, 3, 4].map((i) => (
-                  <div key={i} className="h-8 w-8 rounded-full border-2 border-background bg-muted overflow-hidden">
-                    <img
-                      src={`/sara.png?height=32&width=32&text=${i}`}
-                      alt="User avatar"
-                      className="h-full w-full object-cover"
-                    />
-                  </div>
-                ))}
-              </div>
-              <div>
-                <span className="font-medium">10,000+</span> students already improving their grades
-              </div>
-            </div>
+            <div className="flex -space-x-4">
+  {['beza.png', 'dev.png', 'sara.png'].map((img, i) => (
+    <Image
+      width={40}
+      height={40}
+      key={i}
+      src={`/${img}`}
+      alt={`Avatar ${i}`}
+      className="h-10 w-10 rounded-full border-2 border-white shadow-md object-cover"
+    />
+  ))}
+</div>
+
+  <div>
+    <span className="font-medium">10,000+</span> students already improving their grades
+  </div>
+</div>
+
           </div>
           <div className="flex-1 w-full max-w-xl">
             <HeroAnimation />
@@ -65,7 +70,7 @@ export default function LandingPage() {
       </section>
 
       {/* Features Section */}
-      <section id="features" className="py-20 bg-slate-50 pl-32">
+      <section id="features" className="py-20 bg-slate-50    md:py-28 pl-32">
         <div className="container">
           <div className="text-center max-w-3xl mx-auto mb-16">
             <h2 className="text-3xl md:text-4xl font-bold mb-4">Supercharge Your Learning</h2>
@@ -110,7 +115,7 @@ export default function LandingPage() {
       </section>
 
       {/* How It Works */}
-      <section id="how-it-works" className="py-20 pl-32">
+      <section id="how-it-works" className="py-20  md:py-28 pl-32">
         <div className="container">
           <div className="text-center max-w-3xl mx-auto mb-16">
             <h2 className="text-3xl md:text-4xl font-bold mb-4">How StudyBuddy AI Works</h2>
@@ -156,7 +161,7 @@ export default function LandingPage() {
       </section>
 
       {/* Pricing Section */}
-      <section id="pricing" className="py-20 bg-slate-50 pl-32">
+      <section id="pricing" className="py-20 bg-slate-50  md:py-28 pl-32">
         <div className="container">
           <div className="text-center max-w-3xl mx-auto mb-16">
             <h2 className="text-3xl md:text-4xl font-bold mb-4">Simple, Transparent Pricing</h2>
@@ -210,7 +215,7 @@ export default function LandingPage() {
       </section>
 
       {/* Testimonials */}
-      <section className="py-20 pl-32">
+      <section className="py-20  md:py-28 pl-32">
         <div className="container">
           <div className="text-center max-w-3xl mx-auto mb-16">
             <h2 className="text-3xl md:text-4xl font-bold mb-4">What Our Users Say</h2>

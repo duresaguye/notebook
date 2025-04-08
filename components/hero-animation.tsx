@@ -73,8 +73,8 @@ export default function HeroAnimation() {
               <span className="text-xs font-medium">You</span>
             </div>
             <div className="bg-slate-100 rounded-lg p-3 text-sm">
-              <p>What's the difference between mitochondria and chloroplasts?</p>
-            </div>
+  <p>What&apos;s the difference between mitochondria and chloroplasts?</p>
+</div>
           </div>
           <div className="flex items-start gap-2">
             <div className="h-8 w-8 rounded-full bg-primary/20 flex-shrink-0 flex items-center justify-center">
