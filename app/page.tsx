@@ -5,36 +5,12 @@ import FeatureCard from "@/components/feature-card"
 import PricingCard from "@/components/pricing-card"
 import TestimonialCard from "@/components/testimonial-card"
 import HeroAnimation from "@/components/hero-animation"
-
+import Navbar from "@/components/Navbar"
 export default function LandingPage() {
   return (
     <div className="flex flex-col min-h-screen ">
       {/* Navigation */}
-      <header className="border-b">
-        <div className="container flex items-center justify-between py-4">
-          <div className="flex items-center gap-2">
-            <Brain className="h-6 w-6 text-primary" />
-            <span className="text-xl font-bold">StudyBuddy AI</span>
-          </div>
-          <nav className="hidden md:flex items-center gap-6">
-            <Link href="#features" className="text-sm font-medium hover:text-primary">
-              Features
-            </Link>
-            <Link href="#how-it-works" className="text-sm font-medium hover:text-primary">
-              How It Works
-            </Link>
-            <Link href="#pricing" className="text-sm font-medium hover:text-primary">
-              Pricing
-            </Link>
-          </nav>
-          <div className="flex items-center gap-4">
-            <Button variant="outline" size="sm">
-              Log in
-            </Button>
-            <Button size="sm">Sign up free</Button>
-          </div>
-        </div>
-      </header>
+      <Navbar />
 
       {/* Hero Section */}
       <section className="py-20 md:py-28 pl-32">
@@ -52,10 +28,13 @@ export default function LandingPage() {
               productivity and understanding.
             </p>
             <div className="flex flex-col sm:flex-row gap-4">
-              <Button size="lg" className="gap-2">
-                Get Started Free <ArrowRight className="h-4 w-4" />
-              </Button>
-              <Button size="lg" variant="outline">
+              <Link href="/notes">
+                <Button size="lg" className="gap-2 cursor-pointer">
+                  Get Started Free <ArrowRight className="h-4 w-4" />
+                </Button>
+              </Link>
+             
+              <Button size="lg" variant="outline" className="cursor-pointer">
                 See how it works
               </Button>
             </div>
@@ -161,10 +140,14 @@ export default function LandingPage() {
             ))}
           </div>
 
+
           <div className="mt-16 text-center">
-            <Button size="lg" className="gap-2">
+            <Link href="/notes">
+            <Button size="lg" className="gap-2 cursor-pointer">
               Try It Free <ArrowRight className="h-4 w-4" />
             </Button>
+            </Link>
+            
           </div>
         </div>
       </section>
@@ -263,9 +246,13 @@ export default function LandingPage() {
           <p className="text-xl mb-8 text-primary-foreground/90">
             Join thousands of students who are studying smarter, not harder.
           </p>
-          <Button size="lg" variant="secondary" className="gap-2">
-            Get Started Free <ArrowRight className="h-4 w-4" />
-          </Button>
+          <Link href="/notes">
+  <Button size="lg" variant="secondary" className="gap-2 cursor-pointer">
+    Get Started Free <ArrowRight className="h-4 w-4" />
+  </Button>
+</Link>
+
+          
           <p className="mt-4 text-primary-foreground/80">No credit card required. Cancel anytime.</p>
         </div>
       </section>
