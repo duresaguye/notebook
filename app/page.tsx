@@ -160,59 +160,7 @@ export default function LandingPage() {
         </div>
       </section>
 
-      {/* Pricing Section */}
-      <section id="pricing" className="py-20 bg-slate-50  md:py-28 pl-32">
-        <div className="container">
-          <div className="text-center max-w-3xl mx-auto mb-16">
-            <h2 className="text-3xl md:text-4xl font-bold mb-4">Simple, Transparent Pricing</h2>
-            <p className="text-xl text-muted-foreground">Choose the plan that fits your needs</p>
-          </div>
-
-          <div className="grid md:grid-cols-3 gap-8">
-            <PricingCard
-              title="Free"
-              price="$0"
-              description="Perfect for trying out StudyBuddy"
-              features={["Basic note-taking", "5 AI summaries per month", "Limited chat with AI", "1 subject"]}
-              buttonText="Get Started"
-              buttonVariant="outline"
-            />
-            <PricingCard
-              title="Pro"
-              price="$9.99"
-              period="per month"
-              description="Everything you need for serious studying"
-              features={[
-                "Advanced note-taking",
-                "Unlimited AI summaries",
-                "Unlimited chat with AI",
-                "5 subjects",
-                "Exam preparation tools",
-                "Priority support",
-              ]}
-              buttonText="Get Pro"
-              buttonVariant="default"
-              popular={true}
-            />
-            <PricingCard
-              title="Team"
-              price="$19.99"
-              period="per month"
-              description="Perfect for study groups and classes"
-              features={[
-                "Everything in Pro",
-                "Collaborative notes",
-                "Group chat with AI",
-                "Unlimited subjects",
-                "Admin dashboard",
-                "API access",
-              ]}
-              buttonText="Contact Sales"
-              buttonVariant="outline"
-            />
-          </div>
-        </div>
-      </section>
+  
 
       {/* Testimonials */}
       <section className="py-20  md:py-28 pl-32">
@@ -256,12 +204,12 @@ export default function LandingPage() {
           </p>
           <Link href="/notes">
   <Button size="lg" variant="secondary" className="gap-2 cursor-pointer">
-    Get Started Free <ArrowRight className="h-4 w-4" />
+    Get Started <ArrowRight className="h-4 w-4" />
   </Button>
 </Link>
 
           
-          <p className="mt-4 text-primary-foreground/80">No credit card required. Cancel anytime.</p>
+          
         </div>
       </section>
 

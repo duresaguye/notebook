@@ -1,5 +1,4 @@
 "use client"
-
 import { useState } from "react"
 import dynamic from 'next/dynamic'
 import { Button } from "@/components/ui/button"
@@ -8,12 +7,10 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { Badge } from "@/components/ui/badge"
 import { X } from "lucide-react"
 import { NoteView } from "@/components/note-view"
-import { Toolbar } from "@/components/editor/toolbar"
-import { ImageUpload } from "@/components/editor/image-upload"
 import { toast } from "sonner"
 
-const RichTextEditor = dynamic(
-  () => import('./RichTextEditor').then(mod => mod.RichTextEditor),
+const CoolTextarea = dynamic(
+  () => import('./RichTextEditor').then(mod => mod.CoolTextarea),
   { 
     ssr: false,
     loading: () => <div className="h-[300px] animate-pulse bg-muted rounded-md" />
@@ -40,7 +37,6 @@ export function NoteEditor({
   const [tags, setTags] = useState<string[]>(initialTags)
   const [newTag, setNewTag] = useState("")
   const [activeTab, setActiveTab] = useState("edit")
-  const [showImageUpload, setShowImageUpload] = useState(false)
 
   const handleAddTag = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === "Enter" && newTag.trim()) {
@@ -54,10 +50,6 @@ export function NoteEditor({
 
   const handleRemoveTag = (tagToRemove: string) => {
     setTags(tags.filter((tag) => tag !== tagToRemove))
-  }
-
-  const handleImageSelected = (imageUrl: string) => {
-    setContent(prev => `${prev}\n![Image](${imageUrl})\n`)
   }
 
   const handleSave = async (e: React.FormEvent) => {
@@ -124,17 +116,13 @@ export function NoteEditor({
           <TabsTrigger value="preview">Preview</TabsTrigger>
         </TabsList>
         <TabsContent value="edit" className="mt-2">
-          <div className="space-y-2">
-            <Toolbar 
-              onImageUpload={() => setShowImageUpload(true)} 
-              onInsert={(text) => setContent(prev => `${prev}${text}`)} 
-            />
-            <RichTextEditor
-              value={content}
-              onChange={setContent}
-              className="min-h-[300px] rounded-md border"
-            />
-          </div>
+          <CoolTextarea
+            value={content}
+            onChange={setContent}
+            placeholder="Start writing your note..."
+            className="min-h-[300px]"
+            characterLimit={5000}
+          />
         </TabsContent>
         <TabsContent value="preview" className="mt-2">
           <div className="border rounded-md min-h-[300px] p-4">
@@ -157,12 +145,6 @@ export function NoteEditor({
           {isLoading ? "Saving..." : "Save Note"}
         </Button>
       </div>
-
-      <ImageUpload
-        open={showImageUpload}
-        onClose={() => setShowImageUpload(false)}
-        onImageSelected={handleImageSelected}
-      />
     </form>
   )
 }
