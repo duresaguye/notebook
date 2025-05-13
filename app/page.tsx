@@ -2,7 +2,7 @@ import Link from "next/link"
 import { ArrowRight, BookOpen, Brain, MessageSquare, Sparkles, Zap } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import FeatureCard from "@/components/feature-card"
-import PricingCard from "@/components/pricing-card"
+
 import TestimonialCard from "@/components/testimonial-card"
 import HeroAnimation from "@/components/hero-animation"
 import Navbar from "@/components/Navbar"
