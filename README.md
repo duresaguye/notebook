@@ -1,36 +1,99 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
-## Getting Started
 
-First, run the development server:
+# 📒 Study Smarter – AI-Powered Notes App
+
+Boost your productivity and understanding with **AI-Powered Notes**. Take better notes, get instant summaries, and chat with your AI assistant to dive deeper into any topic — all in one streamlined app.
+
+## 🚀 Features
+
+* ✍️ **Smart Note-Taking**: Write and organize notes in a beautiful editor.
+* ⚡ **AI Summarization**: Instantly summarize any note with one click.
+* 🤖 **Chat with AI Assistant**: Ask questions and get answers from your study notes using Gemini AI.
+* 🔎 **Topic Understanding**: Get contextual explanations and related topics.
+* 💾 **Persistent Storage**: Save your notes with local or cloud storage (future enhancement).
+* 🌙 **Dark Mode Support**: Study comfortably, day or night.
+
+---
+
+## 🛠️ Built With
+
+* **[Next.js](https://nextjs.org/)** – React framework for production-grade web apps
+* **[Gemini AI API](https://deepmind.google/technologies/gemini/)** – AI assistant for summarization and answering questions
+* **[Tailwind CSS](https://tailwindcss.com/)** – Utility-first CSS for styling
+* **[React Markdown](https://github.com/remarkjs/react-markdown)** – Render Markdown notes beautifully
+* **\[OpenAI/Gemini SDKs]** – Powering the assistant & summarization logic
+
+---
+
+## 📦 Getting Started
+
+### 1. Clone the Repository
+
+```bash
+git clone https://github.com/duresaguye/notebook.git
+cd notebook
+```
+
+### 2. Install Dependencies
+
+```bash
+npm install
+# or
+yarn install
+```
+
+### 3. Setup Environment Variables
+
+Create a `.env.local` file in the root and add your API keys:
+
+```env
+GEMINI_API_KEY=your_gemini_api_key_here
+```
+
+> Replace with your actual Gemini or OpenAI key depending on your integration.
+
+### 4. Run the Development Server
 
 ```bash
 npm run dev
 # or
 yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Visit `http://localhost:3000` to use the app.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+---
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
 
-## Learn More
+---
 
-To learn more about Next.js, take a look at the following resources:
+## ✨ Future Improvements
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+* ✅ Save notes to cloud storage (Firebase / Supabase)
+* ✅ Authentication & user accounts
+* ✅ Export notes as PDF / Markdown
+* ✅ Collaborative note editing
+* ✅ Mobile-friendly design
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+---
 
-## Deploy on Vercel
+## 🤝 Contributing
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Contributions are welcome! If you find a bug or want to add a feature, feel free to:
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+* Fork the repo
+* Create a new branch
+* Submit a pull request
+
+---
+
+
+
+## 🙌 Acknowledgments
+
+* Gemini AI (Google DeepMind)
+* Next.js & Vercel
+* Tailwind CSS
+
+---
+

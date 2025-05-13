@@ -1,3 +1,4 @@
+
 "use client"
 import { useState } from "react"
 import dynamic from 'next/dynamic'
@@ -8,6 +9,7 @@ import { Badge } from "@/components/ui/badge"
 import { X } from "lucide-react"
 import { NoteView } from "@/components/note-view"
 import { toast } from "sonner"
+import { useRouter } from "next/navigation"
 
 const CoolTextarea = dynamic(
   () => import('./RichTextEditor').then(mod => mod.CoolTextarea),
@@ -22,7 +24,7 @@ interface NoteEditorProps {
   initialContent?: string
   initialTags?: string[]
   isLoading?: boolean
-  onSave: (title: string, content: string, tags: string[]) => void
+  onSave: (title: string, content: string, tags: string[]) => Promise<void>
 }
 
 export function NoteEditor({
@@ -32,6 +34,7 @@ export function NoteEditor({
   isLoading = false,
   onSave,
 }: NoteEditorProps) {
+  const router = useRouter()
   const [title, setTitle] = useState(initialTitle)
   const [content, setContent] = useState(initialContent)
   const [tags, setTags] = useState<string[]>(initialTags)
@@ -67,12 +70,13 @@ export function NoteEditor({
 
     try {
       await onSave(title.trim(), content.trim(), tags)
+      toast.success("Note saved successfully!")
+      router.push('/notes')
     } catch (error) {
       console.error("Error saving note:", error)
       toast.error("Failed to save note. Please try again.")
     }
   }
-
   return (
     <form onSubmit={handleSave} className="space-y-4">
       <div className="space-y-2">
